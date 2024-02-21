@@ -1,5 +1,12 @@
 package com.Encommerce.logica;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,8 +22,11 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@Entity
 public class Producto {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idProducto;
 
     private String nombreProducto;
@@ -24,5 +34,9 @@ public class Producto {
     private String imagenProducto;
     private Double precioProducto;
     private int cantidadProducto;
+    
+    @ManyToOne
+    private Usuario usuario;
+    
 
 }
