@@ -19,5 +19,11 @@ public class ProductoController {
         
     }
     
+    @GetMapping("/create")
+    public String create(){
+        
+        return "administrador/productos/create.html";
+    }
+    
     
 }
