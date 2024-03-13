@@ -1,7 +1,11 @@
 package com.Encommerce.controlador;
 
+import com.Encommerce.logica.Producto;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -11,6 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/producto")
 public class ProductoController {
+    
+    //Creacion de variable logger
+    
+    private final Logger loggger = LoggerFactory.getLogger(ProductoController.class);
     
     @GetMapping("")
     public String Show(){
@@ -23,7 +31,14 @@ public class ProductoController {
     public String create(){
         
         return "administrador/productos/create.html";
+        
     }
     
+    @PostMapping("/guardar")
+    public String guardar(Producto producto){
+    
+        loggger.info("Este es el objeto de la vista {}",producto);
+        return "redirect:/productos";
+    }
     
 }

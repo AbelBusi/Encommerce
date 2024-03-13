@@ -9,7 +9,6 @@ public class SpringEncommerceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SpringEncommerceApplication.class, args);
 	
-               
         }
 
 }
