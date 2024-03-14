@@ -35,6 +35,19 @@ public class Usuario {
     private String direccionUsuario;
     private String telefonoUsuario;
     private String tipoUsuario;
+    
+    public Usuario(int idUsuario,String nombreUsuario,String nickUsuario, String emailUsuario
+            ,String passwordUsuario,String direccionUsuario, String telefonoUsuario,String tipoUsuario){
+    
+        this.idUsuario=idUsuario;
+        this.nombreUsuario=nombreUsuario;
+        this.nickUsuario=nickUsuario;
+        this.emailUsuario=emailUsuario;
+        this.passwordUsuario=passwordUsuario;
+        this.direccionUsuario=direccionUsuario;
+        this.telefonoUsuario=telefonoUsuario;
+        this.tipoUsuario=tipoUsuario;
+    }
 
     @OneToMany(mappedBy = "usuario")
     private List<Producto> productos;
