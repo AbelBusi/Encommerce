@@ -25,6 +25,10 @@ public class ProductoController {
     //a un sistem.println (es mas seguro en el ambito laboral)
     private final Logger loggger = LoggerFactory.getLogger(ProductoController.class);
     
+    public int suma (){
+    
+        return 2+2;
+    }
     
     @Autowired
     private ProductoService productoService;
