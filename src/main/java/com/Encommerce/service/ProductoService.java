@@ -1,6 +1,7 @@
 package com.Encommerce.service;
 
 import com.Encommerce.logica.Producto;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -14,5 +15,6 @@ public interface ProductoService {
     public Optional<Producto> get(int id);
     public void actualizar(Producto producto);
     public void eliminar(int id);
+    public List<Producto> mostrarProductos();
     
 }

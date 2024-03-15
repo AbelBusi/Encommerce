@@ -2,6 +2,7 @@ package com.Encommerce.service;
 
 import com.Encommerce.logica.Producto;
 import com.Encommerce.repository.ProductoRepository;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,11 @@ public class ProductoServiceImpl implements ProductoService {
         
         productoRepository.deleteById(id);
         
+    }
+
+    @Override
+    public List<Producto> mostrarProductos() {
+        return productoRepository.findAll();
     }
     
 }

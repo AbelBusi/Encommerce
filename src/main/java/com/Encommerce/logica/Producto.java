@@ -5,13 +5,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import java.util.List;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-//import lombok.ToString;
 
 /**
  *
@@ -19,9 +14,6 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-//@NoArgsConstructor
-//@AllArgsConstructor
-//@ToString
 @Entity
 public class Producto {
 
@@ -40,10 +32,9 @@ public class Producto {
 
     public Producto() {
     }
-    
-    
 
     public Producto(int idProducto, String nombreProducto, String descripcionProducto, Double precioProducto, int cantidadProducto, String imagenProducto, Usuario usuario) {
+        super();
         this.idProducto = idProducto;
         this.nombreProducto = nombreProducto;
         this.descripcionProducto = descripcionProducto;
@@ -55,14 +46,12 @@ public class Producto {
 
     @Override
     public String toString() {
-        return "Producto{" + "idProducto=" + idProducto 
-                + ", nombreProducto=" + nombreProducto 
-                + ", descripcionProducto=" + descripcionProducto 
-                + ", precioProducto=" + precioProducto 
-                + ", cantidadProducto=" + cantidadProducto 
+        return "Producto{" + "idProducto=" + idProducto
+                + ", nombreProducto=" + nombreProducto
+                + ", descripcionProducto=" + descripcionProducto
+                + ", precioProducto=" + precioProducto
+                + ", cantidadProducto=" + cantidadProducto
                 + ", imagenProducto=" + imagenProducto + '}';
     }
-
-    
 
 }
