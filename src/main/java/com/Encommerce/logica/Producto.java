@@ -19,8 +19,8 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
+//@NoArgsConstructor
+//@AllArgsConstructor
 //@ToString
 @Entity
 public class Producto {
@@ -31,20 +31,38 @@ public class Producto {
 
     private String nombreProducto;
     private String descripcionProducto;
-    private String imagenProducto;
     private Double precioProducto;
     private int cantidadProducto;
-    
+    private String imagenProducto;
+
     @ManyToOne
     private Usuario usuario;
+
+    public Producto() {
+    }
     
+    
+
+    public Producto(int idProducto, String nombreProducto, String descripcionProducto, Double precioProducto, int cantidadProducto, String imagenProducto, Usuario usuario) {
+        this.idProducto = idProducto;
+        this.nombreProducto = nombreProducto;
+        this.descripcionProducto = descripcionProducto;
+        this.precioProducto = precioProducto;
+        this.cantidadProducto = cantidadProducto;
+        this.imagenProducto = imagenProducto;
+        this.usuario = usuario;
+    }
 
     @Override
     public String toString() {
-        return "Producto{" + "idProducto=" + idProducto + ", nombreProducto=" + 
-                nombreProducto + ", descripcionProducto=" + descripcionProducto 
-                + ", imagenProducto=" + imagenProducto + ", precioProducto=" 
-                + precioProducto + ", cantidadProducto=" + cantidadProducto + '}';
+        return "Producto{" + "idProducto=" + idProducto 
+                + ", nombreProducto=" + nombreProducto 
+                + ", descripcionProducto=" + descripcionProducto 
+                + ", precioProducto=" + precioProducto 
+                + ", cantidadProducto=" + cantidadProducto 
+                + ", imagenProducto=" + imagenProducto + '}';
     }
+
     
+
 }

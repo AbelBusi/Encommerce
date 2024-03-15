@@ -5,6 +5,7 @@ import com.Encommerce.logica.Usuario;
 import com.Encommerce.service.ProductoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,7 +24,10 @@ public class ProductoController {
     //a un sistem.println (es mas seguro en el ambito laboral)
     private final Logger loggger = LoggerFactory.getLogger(ProductoController.class);
     
-    private ProductoService productoService;
+    /*
+    @Autowired
+    private ProductoService productoService;*/
+    
     
     @GetMapping("")
     public String Show(){
@@ -45,10 +49,10 @@ public class ProductoController {
     
         loggger.info("Este es el objeto de la vista {}",producto);
 
-        //Usuario usuario = new Usuario(1, "Abel", "", "", 
-          //      "", "", "", "ADMIN");
-        //producto.setUsuario(usuario);
-        //productoService.guardar(producto);
+        /*Usuario usuario = new Usuario(1, "Abel", "", "", 
+                "", "", "", "ADMIN");
+        producto.setUsuario(usuario);
+        productoService.guardar(producto);*/
         return "redirect:/producto";
     }
     

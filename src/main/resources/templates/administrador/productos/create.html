@@ -37,44 +37,44 @@
             </ol>
 
             <h2>Crear Producto</h2>
-            <form class="form-horizontal" th:action="@{/producto/guardar}" method="POST" enctype="multipart/form-data">
+            <form class="form-horizontal" th:action="@{/producto/guardar}" method="POST"  enctype="multipart/form-data">
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="nombre">Nombre:</label>
+                    <label class="control-label col-sm-2" for="nombreProducto">Nombre:</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" id="nombreProducto" name="nombreProducto"
                                placeholder="Ingrese el nombre del producto" autocomplete="off" required>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="descripcion">Descripción:</label>
+                    <label class="control-label col-sm-2" for="descripcionProducto">Descripción:</label>
                     <div class="col-sm-10">
-                        <textarea class="form-control" id="descripcion" name="descripcion"
+                        <textarea class="form-control" id="descripcionProducto" name="descripcionProducto"
                                   placeholder="Ingrese la descripcion del producto" required
                                   autocomplete="off"> </textarea>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="cantidad">Cantidad:</label>
+                    <label class="control-label col-sm-2" for="cantidadProducto">Cantidad:</label>
                     <div class="col-sm-10">
-                        <input type="number" class="form-control" id="cantidad"
-                               name="cantidad" placeholder="Ingrese la cantidad del producto"
+                        <input type="number" class="form-control" id="cantidadProducto"
+                               name="cantidadProducto" placeholder="Ingrese la cantidad del producto"
                                required autocomplete="off">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="precio">Precio:</label>
+                    <label class="control-label col-sm-2" for="precioProducto">Precio:</label>
                     <div class="col-sm-10">
-                        <input type="number" class="form-control" step="any" id="precio" name="precio"
+                        <input type="number" class="form-control" step="any" id="precioProducto" name="precioProducto"
                                placeholder="Ingrese el precio del producto" autocomplete="off" required>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="img">Imagen:</label>
+                    <label class="control-label col-sm-2" for="imagenProducto">Imagen:</label>
                     <div class="col-sm-10">
-                        <input type="file" class="form-control-file" id="img" name="img">
+                        <input type="text" class="form-control" id="imagenProducto" name="imagenProducto">
                     </div>
                 </div>
 
