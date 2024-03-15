@@ -11,7 +11,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
+//import lombok.ToString;
 
 /**
  *
@@ -21,7 +21,7 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+//@ToString
 @Entity
 public class Producto {
 
@@ -39,4 +39,12 @@ public class Producto {
     private Usuario usuario;
     
 
+    @Override
+    public String toString() {
+        return "Producto{" + "idProducto=" + idProducto + ", nombreProducto=" + 
+                nombreProducto + ", descripcionProducto=" + descripcionProducto 
+                + ", imagenProducto=" + imagenProducto + ", precioProducto=" 
+                + precioProducto + ", cantidadProducto=" + cantidadProducto + '}';
+    }
+    
 }

@@ -45,10 +45,10 @@ public class ProductoController {
     
         loggger.info("Este es el objeto de la vista {}",producto);
 
-        Usuario usuario = new Usuario(1, "Abel", "", "", 
-                "", "", "", "ADMIN");
-        producto.setUsuario(usuario);
-        productoService.guardar(producto);
+        //Usuario usuario = new Usuario(1, "Abel", "", "", 
+          //      "", "", "", "ADMIN");
+        //producto.setUsuario(usuario);
+        //productoService.guardar(producto);
         return "redirect:/producto";
     }
     

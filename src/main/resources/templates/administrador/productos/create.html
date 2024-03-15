@@ -37,11 +37,11 @@
             </ol>
 
             <h2>Crear Producto</h2>
-            <form class="form-horizontal" th:action="@{/producto/guardar}" method="post" enctype="multipart/form-data">
+            <form class="form-horizontal" th:action="@{/producto/guardar}" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="nombre">Nombre:</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="nombre" name="nombre"
+                        <input type="text" class="form-control" id="nombreProducto" name="nombreProducto"
                                placeholder="Ingrese el nombre del producto" autocomplete="off" required>
                     </div>
                 </div>
