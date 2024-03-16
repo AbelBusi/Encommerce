@@ -27,6 +27,9 @@ public class ProductoController {
     //a un sistem.println (es mas seguro en el ambito laboral)
     private final Logger loggger = LoggerFactory.getLogger(ProductoController.class);
     
+    //prueba xd 
+    int hola;
+    
     @Autowired
     private ProductoService productoService;
     
