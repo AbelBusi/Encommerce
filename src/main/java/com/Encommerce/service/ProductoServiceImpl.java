@@ -23,7 +23,7 @@ public class ProductoServiceImpl implements ProductoService {
     }
     
     @Override
-    public Optional<Producto> get(int id) {
+    public Optional<Producto> mos(Integer id) {
         return productoRepository.findById(id);
     }
     
@@ -35,7 +35,7 @@ public class ProductoServiceImpl implements ProductoService {
     }
     
     @Override
-    public void eliminar(int id) {
+    public void eliminar(Integer id) {
         
         productoRepository.deleteById(id);
         

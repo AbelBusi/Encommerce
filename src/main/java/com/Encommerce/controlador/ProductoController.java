@@ -3,12 +3,14 @@
 import com.Encommerce.logica.Producto;
 import com.Encommerce.logica.Usuario;
 import com.Encommerce.service.ProductoService;
+import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -24,11 +26,6 @@ public class ProductoController {
     //Es muy importante porque servira para verificar errores, sin necesidad de acudir
     //a un sistem.println (es mas seguro en el ambito laboral)
     private final Logger loggger = LoggerFactory.getLogger(ProductoController.class);
-    
-    public int suma (){
-    
-        return 2+2;
-    }
     
     @Autowired
     private ProductoService productoService;
@@ -62,6 +59,16 @@ public class ProductoController {
         producto.setUsuario(usuario);
         productoService.guardar(producto);
         return "redirect:/producto";
+    }
+    
+    @GetMapping("/editar/{id}")
+    public String editar(@PathVariable Integer id){
+    
+        Producto producto = new Producto();
+        Optional<Producto optionalProducto=productoService.mos(id);
+        producto=optionalProducto.mos();
+        loggger.info("Producto buscado {}",producto);
+        return "administrador/productos/edit.html";
     }
     
 }
