@@ -65,13 +65,22 @@ public class ProductoController {
     }
     
     @GetMapping("/editar/{id}")
-    public String editar(@PathVariable Integer id){
+    public String editar(@PathVariable Integer id, Model mostrarProducto){
     
         Producto producto = new Producto();
-        Optional<Producto optionalProducto=productoService.mos(id);
-        producto=optionalProducto.mos();
+        Optional<Producto> optionalProducto=productoService.get(id);
+        producto=optionalProducto.get();
         loggger.info("Producto buscado {}",producto);
+        mostrarProducto.addAttribute("producto",producto);
         return "administrador/productos/edit.html";
     }
+    
+    @PostMapping("/actualizar")
+    public String actualizar (Producto producto){
+    
+        productoService.actualizar(producto);
+        return "redirect:/producto";
+    }
+    
     
 }
