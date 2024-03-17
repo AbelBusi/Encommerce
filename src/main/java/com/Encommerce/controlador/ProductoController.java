@@ -82,5 +82,14 @@ public class ProductoController {
         return "redirect:/producto";
     }
     
+    @GetMapping("/eliminar/{id}")
+    public String eliminar(@PathVariable Integer id){
+        Producto producto = new Producto();
+        Optional<Producto> optionalProducto=productoService.get(id);
+        producto=optionalProducto.get(); 
+        productoService.eliminar(producto.getIdProducto());
+        return "redirect:/producto";
+    }
+    
     
 }
