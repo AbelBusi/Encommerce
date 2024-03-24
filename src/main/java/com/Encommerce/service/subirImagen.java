@@ -15,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class subirImagen {
     
-    private String folder="images//";
+    private String folder="imagenes//";
     
     public String guardarImagenProducto(MultipartFile file) throws IOException{
     
