@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Spring eCommerce</title>
+
+
+        <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+
+        <!-- Custom styles for this template -->
+        <link th:href="@{/css/heroic-features.css}" rel="stylesheet">
+
+    </head>
+
+    <body>
+
+        <!-- Navigation -->
+        <div th:insert="~{administrador/usuario/template_usuario.html::header}"></div>
+
+        <!-- Page Content -->
+        <div class="container">
+
+            <!-- Jumbotron Header -->
+            <header class="jumbotron my-4">
+                <h1 class="display-3">Lideres en la tecnologia del momento</h1>
+                <p class="lead">Conoce nuestra alta gama de productos</p>
+            </header>
+
+            <!-- Page Features -->
+            <div class="row text-center">
+
+                <div class="col-lg-3 col-md-6 mb-5" th:each="producto:${productos}">
+                    <div class="card h-100">
+                        <img class="card-img-top" th:src="@{/imagenes/{img} (img=${producto.imagenProducto})}" alt="">
+                        <div class="card-body">
+                            <p class="card-text" th:text="${producto.nombreProducto}"></p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="productohome.html" class="btn btn-success">Ver producto</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.row -->
+
+        </div>
+        <!-- /.container -->
+
+        <!-- Footer -->
+        <div th:insert="~{administrador/template_admin.html::footer}"></div>
+
+        <!-- Bootstrap core JavaScript -->
+        <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+        <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+    </body>
+
+</html>
