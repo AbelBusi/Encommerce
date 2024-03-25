@@ -54,7 +54,7 @@ public class ProductoController {
     }
 
     @PostMapping("/guardar")
-    public String guardar(Producto producto, @RequestParam("imagenProducto") MultipartFile file) throws IOException {
+    public String guardar(Producto producto, @RequestParam(name="img") MultipartFile file) throws IOException {
 
         loggger.info("Este es el objeto de la vista {}", producto);
 

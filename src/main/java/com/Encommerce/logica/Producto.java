@@ -23,9 +23,9 @@ public class Producto {
 
     private String nombreProducto;
     private String descripcionProducto;
+    private String imagenProducto;
     private Double precioProducto;
     private int cantidadProducto;
-    private String imagenProducto;
 
     @ManyToOne
     private Usuario usuario;
@@ -33,14 +33,14 @@ public class Producto {
     public Producto() {
     }
 
-    public Producto(int idProducto, String nombreProducto, String descripcionProducto, Double precioProducto, int cantidadProducto, String imagenProducto, Usuario usuario) {
+    public Producto(Integer idProducto, String nombreProducto, String descripcionProducto, Double precioProducto, int cantidadProducto, String imagenProducto, Usuario usuario) {
         super();
         this.idProducto = idProducto;
         this.nombreProducto = nombreProducto;
         this.descripcionProducto = descripcionProducto;
+        this.imagenProducto = imagenProducto;
         this.precioProducto = precioProducto;
         this.cantidadProducto = cantidadProducto;
-        this.imagenProducto = imagenProducto;
         this.usuario = usuario;
     }
 
