@@ -31,7 +31,7 @@ public class subirImagen {
     
     public void eliminarImagenProducto(String nommbreImagen){
         
-        String rutaImagen = "images//";
+        String rutaImagen = "imagenes//";
         File file = new File(rutaImagen+nommbreImagen);
         file.delete();
                 

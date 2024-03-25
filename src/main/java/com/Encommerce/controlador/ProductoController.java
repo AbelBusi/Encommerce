@@ -89,7 +89,7 @@ public class ProductoController {
     }
 
     @PostMapping("/actualizar")
-    public String actualizar(Producto producto, @RequestParam("imagenProducto") MultipartFile file) throws IOException {
+    public String actualizar(Producto producto, @RequestParam("img") MultipartFile file) throws IOException {
 
         if (file.isEmpty()) {
             Producto p = new Producto();
@@ -118,15 +118,15 @@ public class ProductoController {
     public String eliminar(@PathVariable Integer id) {
 
         Producto producto = new Producto();
-        productoService.get(id).get();
+        producto=productoService.get(id).get();
         //Sentencia de eliminar una imagen siempre y cuando no tenga imagen por defecto
-        if (producto.getImagenProducto().equals("default.jpg")) {
+        if (!producto.getImagenProducto().equals("default.jpg")) {
 
             subirImagen.eliminarImagenProducto(producto.getImagenProducto());
         }
-        Optional<Producto> optionalProducto = productoService.get(id);
-        producto = optionalProducto.get();
-        productoService.eliminar(producto.getIdProducto());
+        //Optional<Producto> optionalProducto = productoService.get(id);
+        //producto = optionalProducto.get();
+        productoService.eliminar(id);
         return "redirect:/producto";
     }
 
