@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-
 <head>
 
   <meta charset="utf-8">
@@ -22,6 +21,7 @@
 <body>
 
   <!-- Navigation -->
+
   <div th:insert="~{administrador/usuario/template_usuario.html::header}"></div>
 
     <!-- Page Content -->
@@ -30,53 +30,57 @@
 
       <!-- Page Heading/Breadcrumbs -->
       <h1 class="mt-4 mb-3">
-        Gamer House <small>Producto</small>
+        Spring eCommerce <small>Carrito</small>
       </h1>
 
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
-        <li class="breadcrumb-item active">Producto</li>
+        <li class="breadcrumb-item active">Carrito</li>
       </ol>
 
       <!-- Blog Post -->
       <div class="card mb-4">
         <div class="card-body">
           <div class="row">
-            <div class="col-lg-6">
-              <a href="#"> <img class="img-fluid rounded"
-                th:src="@{/imagenes/{img} (img=${producto.imagenProducto})  }"  alt="">
-              </a>
-            </div>
-            <div class="col-lg-6">
-              <form th:action="@{/carrito}" method="POST">
-                <h2 class="card-title"  th:text="${producto.nombreProducto}">PRODUCTO</h2>
-
-                <ul class="list-group">
-                  <li class="list-group-item"><h5 th:text=" 'Precio: ' + ${producto.precioProducto}"></h5></li>
-                  <li class="list-group-item">
-                    <p th:text=" 'Descripcion: ' + ${producto.descripcionProducto}"></p>
-                  </li>
-                  <li class="list-group-item"><h6>
-                    Cantidad: <input type="number" id="cantidad" name="cantidad" autocomplete="off"
-                    min="1" max="5" value="1">
-                  </h6></li>
-                </ul>
-
-
-                <button type="submit"  class="btn btn-dark">Añadir al carrito </button>
-
-              </form>
-            </div>
+           <div class="col-lg-9">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Producto</th>
+                  <th scope="col">Precio</th>
+                  <th scope="col">Cantidad</th>
+                  <th scope="col">Total</th>
+                  <th scope="col">Acción</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td >Nombre</td>
+                  <td >Precio</td>
+                  <td>Cantidad</td>
+                  <td >Total</td>
+                  <td><a href="#" class="btn btn-danger">Quitar</a></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
+
+          <div class="col-lg-3">
+            <h2 class="card-title">SUBTOTAL</h2>
+
+            <ul class="list-group">
+              <li class="list-group-item"><h5>Total: $ 10</h5></li>
+              <a href="resumenorden.html" class="btn btn-dark">Ver Orden</a>
+            </ul>
+          </div>
+
         </div>
       </div>
-
-
     </div>
     <!-- /.container -->
 
     <!-- Footer -->
-    <div th:insert="~{administrador/usuario/template_usuario.html::footer}"></div>
+     <div th:insert="~{administrador/usuario/template_usuario.html::footer}"></div>
       <!-- /.container -->
     </footer>
 
