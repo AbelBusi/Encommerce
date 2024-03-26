@@ -59,7 +59,7 @@
                   <td th:text="${detalleOrden.precioOrden}"></td>
                   <td th:text="${detalleOrden.cantidadOrden}"></td>
                   <td th:text="${detalleOrden.totalOrden}"></td>
-                  <td><a href="#" class="btn btn-danger">Quitar</a></td>
+                  <td><a th:href="@{/delete/carrito/{id} (id=${detalleOrden.producto.idProducto})}" class="btn btn-danger">Quitar</a></td>
                 </tr>
               </tbody>
             </table>
@@ -70,7 +70,7 @@
 
             <ul class="list-group">
               <li class="list-group-item"><h5 th:text="${pedido.totalPedido}"></h5></li>
-              <a href="resumenorden.html" class="btn btn-dark">Ver Orden</a>
+              <a href="@{/OrdenResumen}" class="btn btn-dark" >Ver Orden</a>
             </ul>
           </div>
 

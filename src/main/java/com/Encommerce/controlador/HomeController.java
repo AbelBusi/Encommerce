@@ -28,12 +28,12 @@ public class HomeController {
 
     @Autowired
     private ProductoService productoService;
-    
+
     //Almacenar el detalle de una orden
     List<DetalleOrden> detalles = new ArrayList<DetalleOrden>();
 
     Pedido pedido = new Pedido();
-    
+
     private final Logger loggger = LoggerFactory.getLogger(ProductoController.class);
 
     @GetMapping("/")
@@ -52,35 +52,85 @@ public class HomeController {
         producto = optionalProducto.get();
         loggger.info("Producto buscado {}", producto);
         verProducto.addAttribute("producto", producto);
-        
+
         return "administrador/usuario/productoHome.html";
     }
-    
+
     @PostMapping("/carrito")
-    public String addCarrito(@RequestParam Integer idProducto,@RequestParam Integer cantidad, Model model){
-    
-        DetalleOrden detalleOrden= new DetalleOrden();
+    public String addCarrito(@RequestParam Integer idProducto, @RequestParam Integer cantidad, Model model) {
+
+        DetalleOrden detalleOrden = new DetalleOrden();
         Producto producto = new Producto();
-        double sumaTotal=0;
-        Optional<Producto> optionalProducto =productoService.get(idProducto);
+        double sumaTotal = 0;
+        Optional<Producto> optionalProducto = productoService.get(idProducto);
         loggger.info("Producto añadido {}", optionalProducto.get());
-        loggger.info("cantidad: {}",cantidad);
-        
-        producto=optionalProducto.get();
+        loggger.info("cantidad: {}", cantidad);
+
+        producto = optionalProducto.get();
         detalleOrden.setCantidadOrden(cantidad);
         detalleOrden.setPrecioOrden(producto.getPrecioProducto());
         detalleOrden.setNombreDetalleOrden(producto.getNombreProducto());
-        detalleOrden.setTotalOrden(producto.getPrecioProducto()*cantidad);
+        detalleOrden.setTotalOrden(producto.getPrecioProducto() * cantidad);
         detalleOrden.setProducto(producto);
-        
-        detalles.add(detalleOrden);
-        sumaTotal=detalles.stream().mapToDouble(dt ->dt.getTotalOrden()).sum();
+
+        //Validacion para que el producto no se sobrecargue muchas veces
+        Integer idproducto = producto.getIdProducto();
+
+        boolean ingresar = detalles.stream().anyMatch(p -> p.getProducto().getIdProducto() == idproducto);
+        if (!ingresar) {
+
+            detalles.add(detalleOrden);
+
+        }
+
+        sumaTotal = detalles.stream().mapToDouble(dt -> dt.getTotalOrden()).sum();
         pedido.setTotalPedido(sumaTotal);
+        model.addAttribute("carrito", detalles);
+        model.addAttribute("pedido", pedido);
+
+        return "administrador/usuario/carrito.html";
+    }
+
+    @GetMapping("/delete/carrito/{id}")
+    public String eliminarProductoCart(@PathVariable Integer id, Model model) {
+
+        //Lista de los productos
+        List<DetalleOrden> ordenNueva = new ArrayList<DetalleOrden>();
+
+        for (DetalleOrden detalleOrden : detalles) {
+
+            if (detalleOrden.getProducto().getIdProducto() != id) {
+                ordenNueva.add(detalleOrden);
+            }
+
+        }
+
+        //Poner la nueva lista con los productos restantes
+        detalles = ordenNueva;
+
+        double sumaTotal = 0;
+        sumaTotal = detalles.stream().mapToDouble(dt -> dt.getTotalOrden()).sum();
+        pedido.setTotalPedido(sumaTotal);
+        model.addAttribute("carrito", detalles);
+        model.addAttribute("pedido", pedido);
+
+        return "administrador/usuario/carrito.html";
+    }
+    
+    @GetMapping("/getCart")
+    public String getCart(Model model){
+    
         model.addAttribute("carrito",detalles);
         model.addAttribute("pedido",pedido);
         
         return "administrador/usuario/carrito.html";
     }
     
+    @GetMapping("/OrdenResumen")
+    public String resumenOrden(){
+        
+        return "administrador/usuario/resumenorder.html";
+    
+    }
 
 }
