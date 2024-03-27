@@ -1,21 +1,21 @@
 package com.Encommerce.service;
 
 import com.Encommerce.logica.Producto;
-import com.Encommerce.repository.ProductoRepository;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.Encommerce.repository.IProductoRepository;
 
 /**
  *
  * @author cesar
  */
 @Service
-public class ProductoServiceImpl implements ProductoService {
+public class ProductoServiceImpl implements IProductoService {
     
     @Autowired
-    private ProductoRepository productoRepository;
+    private IProductoRepository productoRepository;
     
     @Override
     public Producto guardar(Producto producto) {

@@ -2,7 +2,6 @@ package com.Encommerce.controlador;
 
 import com.Encommerce.logica.Producto;
 import com.Encommerce.logica.Usuario;
-import com.Encommerce.service.ProductoService;
 import com.Encommerce.service.subirImagen;
 import java.io.IOException;
 import java.util.Optional;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import com.Encommerce.service.IProductoService;
 
 /**
  *
@@ -35,7 +35,7 @@ public class ProductoController {
     private subirImagen subirImagen;
 
     @Autowired
-    private ProductoService productoService;
+    private IProductoService productoService;
 
     //Se podra ver los productos en el html
     @GetMapping("")

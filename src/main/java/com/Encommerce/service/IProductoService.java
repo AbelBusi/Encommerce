@@ -9,7 +9,7 @@ import java.util.Optional;
  * @author cesar
  */
 
-public interface ProductoService {
+public interface IProductoService {
     
     public Producto guardar(Producto producto);
     public Optional<Producto> get(Integer id);

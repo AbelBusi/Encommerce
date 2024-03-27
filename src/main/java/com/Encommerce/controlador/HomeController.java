@@ -3,7 +3,7 @@ package com.Encommerce.controlador;
 import com.Encommerce.logica.DetalleOrden;
 import com.Encommerce.logica.Pedido;
 import com.Encommerce.logica.Producto;
-import com.Encommerce.service.ProductoService;
+import com.Encommerce.logica.Usuario;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import com.Encommerce.service.IProductoService;
+import com.Encommerce.service.IUsuarioService;
+import com.Encommerce.service.UsuarioServiceImpl;
 
 /**
  *
@@ -27,8 +30,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class HomeController {
 
     @Autowired
-    private ProductoService productoService;
+    private IProductoService productoService;
 
+    @Autowired
+    private IUsuarioService iUsuarioService;
+    
     //Almacenar el detalle de una orden
     List<DetalleOrden> detalles = new ArrayList<DetalleOrden>();
 
@@ -127,7 +133,13 @@ public class HomeController {
     }
     
     @GetMapping("/OrdenResumen")
-    public String resumenOrden(){
+    public String resumenOrden(Model model){
+        
+        Usuario usuario = iUsuarioService.finById(1).get();
+        
+        model.addAttribute("carrito",detalles);
+        model.addAttribute("pedido",pedido);
+        model.addAttribute("usuario",usuario);
         
         return "administrador/usuario/resumenOrden.html";
     
