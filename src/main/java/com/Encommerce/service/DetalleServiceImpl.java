@@ -1,6 +1,7 @@
 package com.Encommerce.service;
 
 import com.Encommerce.logica.DetalleOrden;
+import com.Encommerce.repository.IDetalleOrdenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,11 +13,11 @@ import org.springframework.stereotype.Service;
 public class DetalleServiceImpl implements IDetalleOrdenService {
     
     @Autowired
-    private IDetalleOrdenService IDetalleOrdenService;
+    private IDetalleOrdenRepository IDetalleOrdenRepository;
     
     @Override
     public DetalleOrden save(DetalleOrden detalleOrden) {
-        return IDetalleOrdenService.save(detalleOrden);
+        return IDetalleOrdenRepository.save(detalleOrden);
     }
     
 }
