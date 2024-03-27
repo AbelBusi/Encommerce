@@ -129,7 +129,7 @@ public class HomeController {
     @GetMapping("/OrdenResumen")
     public String resumenOrden(){
         
-        return "administrador/usuario/resumenorder.html";
+        return "administrador/usuario/resumenOrden.html";
     
     }
 
