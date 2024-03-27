@@ -4,6 +4,8 @@ import com.Encommerce.logica.DetalleOrden;
 import com.Encommerce.logica.Pedido;
 import com.Encommerce.logica.Producto;
 import com.Encommerce.logica.Usuario;
+import com.Encommerce.service.IDetalleOrdenService;
+import com.Encommerce.service.IPedidoService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +22,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.Encommerce.service.IProductoService;
 import com.Encommerce.service.IUsuarioService;
 import com.Encommerce.service.UsuarioServiceImpl;
+import java.util.Date;
+import java.util.Locale;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -34,7 +39,13 @@ public class HomeController {
 
     @Autowired
     private IUsuarioService iUsuarioService;
-    
+
+    @Autowired
+    private IPedidoService iPedidoService;
+
+    @Autowired
+    private IDetalleOrdenService iDetalleOrdenService;
+
     //Almacenar el detalle de una orden
     List<DetalleOrden> detalles = new ArrayList<DetalleOrden>();
 
@@ -122,27 +133,65 @@ public class HomeController {
 
         return "administrador/usuario/carrito.html";
     }
-    
+
     @GetMapping("/getCart")
-    public String getCart(Model model){
-    
-        model.addAttribute("carrito",detalles);
-        model.addAttribute("pedido",pedido);
-        
+    public String getCart(Model model) {
+
+        model.addAttribute("carrito", detalles);
+        model.addAttribute("pedido", pedido);
+
         return "administrador/usuario/carrito.html";
     }
-    
+
     @GetMapping("/OrdenResumen")
-    public String resumenOrden(Model model){
-        
+    public String resumenOrden(Model model) {
+
         Usuario usuario = iUsuarioService.finById(1).get();
-        
-        model.addAttribute("carrito",detalles);
-        model.addAttribute("pedido",pedido);
-        model.addAttribute("usuario",usuario);
-        
+
+        model.addAttribute("carrito", detalles);
+        model.addAttribute("pedido", pedido);
+        model.addAttribute("usuario", usuario);
+
         return "administrador/usuario/resumenOrden.html";
+
+    }
     
+    @GetMapping("/guardarPedido")
+    public String guardarPedido(){
+        
+        Date fechaPedido = new Date();
+        pedido.setFechaCreacionPedido(fechaPedido);
+        pedido.setNumeroPedido(iPedidoService.generarNumeroPedido());
+    
+        Usuario usuario =iUsuarioService.finById(1).get();
+        pedido.setUsuario(usuario);
+        iPedidoService.save(pedido);
+        
+        //Guadar los detalles del pedido
+        for (DetalleOrden dt:detalles){
+            
+            dt.setPedido(pedido);
+            iDetalleOrdenService.save(dt);
+        
+        }
+        
+        //Refrescar la lista y los pedidos
+        Pedido pedido= new Pedido();
+        detalles.clear();
+        
+        return "redirect:/";
+        
+    }
+    
+    @PostMapping("/buscarProducto")
+    public String buscarProducto(@RequestParam String nombreProducto,Model model){
+        
+        loggger.info("Nombre del producto: {}",nombreProducto);
+        //Creando la funcion para buscar o filtrar
+        List<Producto> productos =productoService.mostrarProductos().stream().filter(p -> p.getNombreProducto().contains(nombreProducto.toLowerCase(Locale.ITALY))).collect(Collectors.toList());
+        model.addAttribute("productos",productos);
+    
+        return "administrador/usuario/homeUsuario.html";
     }
 
 }

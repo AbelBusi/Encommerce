@@ -5,8 +5,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import java.util.Date;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -37,7 +39,7 @@ public class Pedido {
     @ManyToOne
     private Usuario usuario;
     
-    @OneToOne(mappedBy = "pedido")
-    private DetalleOrden detalleOrden;
+    @OneToMany(mappedBy = "pedido")
+    private List<DetalleOrden> detalleOrden;
 
 }

@@ -11,6 +11,8 @@ public interface IPedidoService {
     
     Pedido save(Pedido pedido);
     
-    List<Pedido> findAll(); 
+    List<Pedido> findAll();
+    
+    String generarNumeroPedido();
     
 }
