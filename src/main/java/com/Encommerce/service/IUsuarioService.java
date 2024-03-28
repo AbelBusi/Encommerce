@@ -12,4 +12,6 @@ public interface IUsuarioService {
     
     Optional <Usuario> finById(Integer id);
     
+    public Usuario guardar (Usuario usuario);
+    
 }
