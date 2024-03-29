@@ -12,6 +12,7 @@ public interface IUsuarioService {
     
     Optional <Usuario> finById(Integer id);
     
-    public Usuario guardar (Usuario usuario);
+    Usuario guardar (Usuario usuario);
     
+    Optional<Usuario> findByEmailUsuario(String emailUsuario);   
 }

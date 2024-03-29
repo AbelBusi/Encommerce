@@ -20,7 +20,6 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Entity
 public class Usuario {
 
@@ -35,24 +34,36 @@ public class Usuario {
     private String direccionUsuario;
     private String telefonoUsuario;
     private String tipoUsuario;
-    
-    public Usuario(int idUsuario,String nombreUsuario,String nickUsuario, String emailUsuario
-            ,String passwordUsuario,String direccionUsuario, String telefonoUsuario,String tipoUsuario){
-    
-        this.idUsuario=idUsuario;
-        this.nombreUsuario=nombreUsuario;
-        this.nickUsuario=nickUsuario;
-        this.emailUsuario=emailUsuario;
-        this.passwordUsuario=passwordUsuario;
-        this.direccionUsuario=direccionUsuario;
-        this.telefonoUsuario=telefonoUsuario;
-        this.tipoUsuario=tipoUsuario;
+
+    public Usuario(int idUsuario, String nombreUsuario, String nickUsuario, String emailUsuario,
+             String passwordUsuario, String direccionUsuario, String telefonoUsuario, String tipoUsuario) {
+
+        this.idUsuario = idUsuario;
+        this.nombreUsuario = nombreUsuario;
+        this.nickUsuario = nickUsuario;
+        this.emailUsuario = emailUsuario;
+        this.passwordUsuario = passwordUsuario;
+        this.direccionUsuario = direccionUsuario;
+        this.telefonoUsuario = telefonoUsuario;
+        this.tipoUsuario = tipoUsuario;
     }
 
     @OneToMany(mappedBy = "usuario")
     private List<Producto> productos;
-    
-    @OneToMany (mappedBy = "usuario")
+
+    @OneToMany(mappedBy = "usuario")
     private List<Pedido> pedidos;
+
+    @Override
+    public String toString() {
+        return "Usuario{" + "idUsuario=" + idUsuario + 
+                ", nombreUsuario=" + nombreUsuario + 
+                ", nickUsuario=" + nickUsuario + 
+                ", emailUsuario=" + emailUsuario + 
+                ", passwordUsuario=" + passwordUsuario + 
+                ", direccionUsuario=" + direccionUsuario + 
+                ", telefonoUsuario=" + telefonoUsuario + 
+                ", tipoUsuario=" + tipoUsuario + '}';
+    }
 
 }
