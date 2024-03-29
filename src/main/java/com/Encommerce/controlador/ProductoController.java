@@ -2,6 +2,7 @@ package com.Encommerce.controlador;
 
 import com.Encommerce.logica.Producto;
 import com.Encommerce.logica.Usuario;
+import com.Encommerce.repository.IUsuarioRepository;
 import com.Encommerce.service.subirImagen;
 import java.io.IOException;
 import java.util.Optional;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import com.Encommerce.service.IProductoService;
+import com.Encommerce.service.IUsuarioService;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
@@ -31,6 +34,9 @@ public class ProductoController {
     //a un sistem.println (es mas seguro en el ambito laboral)
     private final Logger loggger = LoggerFactory.getLogger(ProductoController.class);
 
+    @Autowired
+    private IUsuarioService IUsuarioService;
+    
     @Autowired
     private subirImagen subirImagen;
 
@@ -54,13 +60,12 @@ public class ProductoController {
     }
 
     @PostMapping("/guardar")
-    public String guardar(Producto producto, @RequestParam(name="img") MultipartFile file) throws IOException {
+    public String guardar(Producto producto, @RequestParam(name="img") MultipartFile file, HttpSession session) throws IOException {
 
         loggger.info("Este es el objeto de la vista {}", producto);
 
         //Por mientras se coloca un usuario quemado, ya que la bd pide que esta tabla tenga un usuario tambien
-        Usuario usuario = new Usuario(1, "Abel", "", "",
-                "", "", "", "ADMIN");
+        Usuario usuario = IUsuarioService.finById(Integer.parseInt(session.getAttribute("idUsuario").toString())).get();
         producto.setUsuario(usuario);
 
         //Esta validacion se usa cuando se crea un producto

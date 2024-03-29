@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.Encommerce.service.IProductoService;
 import com.Encommerce.service.IUsuarioService;
 import com.Encommerce.service.UsuarioServiceImpl;
+import jakarta.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.Locale;
 import java.util.stream.Collectors;
@@ -53,11 +54,14 @@ public class HomeController {
 
     private final Logger loggger = LoggerFactory.getLogger(ProductoController.class);
 
-    @GetMapping("/")
-    public String home(Model producto) {
+    @GetMapping("")
+    public String home(Model producto, HttpSession session) {
 
+        loggger.info("Id del usuario: {}",session.getAttribute("idUsuario"));
         producto.addAttribute("productos", productoService.mostrarProductos());
-
+        
+        producto.addAttribute("sesion",session.getAttribute("idUsuario"));
+        
         return "administrador/usuario/homeUsuario.html";
     }
 
@@ -135,18 +139,18 @@ public class HomeController {
     }
 
     @GetMapping("/getCart")
-    public String getCart(Model model) {
+    public String getCart(Model model, HttpSession session) {
 
         model.addAttribute("carrito", detalles);
         model.addAttribute("pedido", pedido);
-
+        model.addAttribute("sesion",session.getAttribute("idUsuario"));
         return "administrador/usuario/carrito.html";
     }
 
     @GetMapping("/OrdenResumen")
-    public String resumenOrden(Model model) {
+    public String resumenOrden(Model model, HttpSession session) {
 
-        Usuario usuario = iUsuarioService.finById(1).get();
+        Usuario usuario = iUsuarioService.finById(Integer.parseInt(session.getAttribute("idUsuario").toString())).get();
 
         model.addAttribute("carrito", detalles);
         model.addAttribute("pedido", pedido);
@@ -157,13 +161,13 @@ public class HomeController {
     }
     
     @GetMapping("/guardarPedido")
-    public String guardarPedido(){
+    public String guardarPedido(HttpSession session){
         
         Date fechaPedido = new Date();
         pedido.setFechaCreacionPedido(fechaPedido);
         pedido.setNumeroPedido(iPedidoService.generarNumeroPedido());
     
-        Usuario usuario =iUsuarioService.finById(1).get();
+        Usuario usuario =iUsuarioService.finById(Integer.parseInt(session.getAttribute("idUsuario").toString())).get();
         pedido.setUsuario(usuario);
         iPedidoService.save(pedido);
         
