@@ -1,6 +1,7 @@
 package com.Encommerce.service;
 
 import com.Encommerce.logica.Pedido;
+import com.Encommerce.logica.Usuario;
 import com.Encommerce.repository.IPedidoRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -75,6 +76,13 @@ public class PedidoServiceImpl implements IPedidoService {
 
         return numeroConcatenado;
 
+    }
+
+    @Override
+    public List<Pedido> mostrarPedidoIdUsuario(Usuario usuario) {
+        
+        return iPedidoRepository.findByUsuario(usuario);
+        
     }
 
 }

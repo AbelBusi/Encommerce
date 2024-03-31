@@ -57,11 +57,11 @@ public class HomeController {
     @GetMapping("")
     public String home(Model producto, HttpSession session) {
 
-        loggger.info("Id del usuario: {}",session.getAttribute("idUsuario"));
+        loggger.info("Id del usuario: {}", session.getAttribute("idUsuario"));
         producto.addAttribute("productos", productoService.mostrarProductos());
-        
-        producto.addAttribute("sesion",session.getAttribute("idUsuario"));
-        
+
+        producto.addAttribute("sesion", session.getAttribute("idUsuario"));
+
         return "administrador/usuario/homeUsuario.html";
     }
 
@@ -143,7 +143,7 @@ public class HomeController {
 
         model.addAttribute("carrito", detalles);
         model.addAttribute("pedido", pedido);
-        model.addAttribute("sesion",session.getAttribute("idUsuario"));
+        model.addAttribute("sesion", session.getAttribute("idUsuario"));
         return "administrador/usuario/carrito.html";
     }
 
@@ -159,42 +159,42 @@ public class HomeController {
         return "administrador/usuario/resumenOrden.html";
 
     }
-    
+
     @GetMapping("/guardarPedido")
-    public String guardarPedido(HttpSession session){
-        
+    public String guardarPedido(HttpSession session) {
+
         Date fechaPedido = new Date();
         pedido.setFechaCreacionPedido(fechaPedido);
         pedido.setNumeroPedido(iPedidoService.generarNumeroPedido());
-    
-        Usuario usuario =iUsuarioService.finById(Integer.parseInt(session.getAttribute("idUsuario").toString())).get();
+
+        Usuario usuario = iUsuarioService.finById(Integer.parseInt(session.getAttribute("idUsuario").toString())).get();
         pedido.setUsuario(usuario);
         iPedidoService.save(pedido);
-        
+
         //Guadar los detalles del pedido
-        for (DetalleOrden dt:detalles){
-            
+        for (DetalleOrden dt : detalles) {
+
             dt.setPedido(pedido);
             iDetalleOrdenService.save(dt);
-        
+
         }
-        
+
         //Refrescar la lista y los pedidos
-        Pedido pedido= new Pedido();
+        Pedido pedido = new Pedido();
         detalles.clear();
-        
+
         return "redirect:/";
-        
+
     }
-    
+
     @PostMapping("/buscarProducto")
-    public String buscarProducto(@RequestParam String nombreProducto,Model model){
-        
-        loggger.info("Nombre del producto: {}",nombreProducto);
+    public String buscarProducto(@RequestParam String nombreProducto, Model model) {
+
+        loggger.info("Nombre del producto: {}", nombreProducto);
         //Creando la funcion para buscar o filtrar
-        List<Producto> productos =productoService.mostrarProductos().stream().filter(p -> p.getNombreProducto().contains(nombreProducto.toLowerCase(Locale.ITALY))).collect(Collectors.toList());
-        model.addAttribute("productos",productos);
-    
+        List<Producto> productos = productoService.mostrarProductos().stream().filter(p -> p.getNombreProducto().contains(nombreProducto.toLowerCase(Locale.ITALY))).collect(Collectors.toList());
+        model.addAttribute("productos", productos);
+
         return "administrador/usuario/homeUsuario.html";
     }
 
