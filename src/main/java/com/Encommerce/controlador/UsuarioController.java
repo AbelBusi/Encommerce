@@ -1,7 +1,9 @@
 package com.Encommerce.controlador;
 
+import com.Encommerce.logica.DetalleOrden;
 import com.Encommerce.logica.Pedido;
 import com.Encommerce.logica.Usuario;
+import com.Encommerce.service.IDetalleOrdenService;
 import com.Encommerce.service.IPedidoService;
 import com.Encommerce.service.IUsuarioService;
 import jakarta.servlet.http.HttpSession;
@@ -13,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -32,8 +35,10 @@ public class UsuarioController {
     @Autowired
     private IPedidoService iPedidoService;
 
-    //Pedido pedido = new Pedido();
+    @Autowired
+    private IDetalleOrdenService IDetalleOrdenService;
 
+    //Pedido pedido = new Pedido();
     @GetMapping("/registro")
     public String registroUsuario() {
 
@@ -98,12 +103,18 @@ public class UsuarioController {
         return "administrador/usuario/compras.html";
 
     }
-    
-    @GetMapping("/detalleCompra")
-    public String detalleCompra (){
-    
-        return "/administrador/usuario/detallecompra.html";
+
+    @GetMapping("/detalleCompra/{idPedido}")
+    public String detalleCompra(Model model, HttpSession session, @PathVariable Integer idPedido) {
+
+        loggger.info("id {}", idPedido);
+        model.addAttribute("sesion", session.getAttribute("idUsuario"));
         
+        Optional <Pedido> pedido=iPedidoService.finById(idPedido);
+        
+        model.addAttribute("detalles",pedido.get().getDetalleOrden());
+        return "administrador/usuario/detallecompra.html";
+
     }
 
 }

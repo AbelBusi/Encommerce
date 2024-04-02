@@ -58,7 +58,7 @@
                                         <td th:text="${pedidos.numeroPedido}"></td>
                                         <td th:text="${pedidos.fechaCreacionPedido}"></td>
                                         <td th:text="${pedidos.totalPedido}"></td>
-                                        <td><a href="detallecompra.html" class="btn btn-success">Ver Detalle</a></td>
+                                        <td><a th:href="@{/usuario/detalleCompra/{idPedido} (idPedido=${pedidos.idPedido})}" class="btn btn-success">Ver Detalle</a></td>
                                     </tr>
                                 </tbody>
                             </table>

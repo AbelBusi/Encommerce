@@ -54,11 +54,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td >Cantidad</td>
-                                        <td >Producto</td>
-                                        <td >Precio</td>
-                                        <td >Total</td>
+                                    <tr th:each="detalle: ${detalles}">
+                                        <td th:text="${detalle.cantidadOrden}" >Cantidad</td>
+                                        <td th:text="${detalle.nombreDetalleOrden}">Producto</td>
+                                        <td th:text="${detalle.precioOrden}" >Precio</td>
+                                        <td th:text="${detalle.totalOrden}" >Total</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -80,4 +80,3 @@
 </body>
 
 </html>
-

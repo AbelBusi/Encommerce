@@ -3,6 +3,7 @@ package com.Encommerce.service;
 import com.Encommerce.logica.Pedido;
 import com.Encommerce.logica.Usuario;
 import java.util.List;
+import java.util.Optional;
 
 /**
  *
@@ -17,5 +18,9 @@ public interface IPedidoService {
     String generarNumeroPedido();
     
     List<Pedido> mostrarPedidoIdUsuario(Usuario usuario);
+    
+    Optional<Pedido> finById(Integer id);
+    
+    
     
 }
