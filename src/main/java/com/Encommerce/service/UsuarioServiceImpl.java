@@ -2,6 +2,7 @@ package com.Encommerce.service;
 
 import com.Encommerce.logica.Usuario;
 import com.Encommerce.repository.IUsuarioRepository;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,13 @@ public class UsuarioServiceImpl implements IUsuarioService {
     public Optional<Usuario> findByEmailUsuario(String emailUsuario) {
         
         return IUsuarioRepository.findByEmailUsuario(emailUsuario);
+        
+    }
+
+    @Override
+    public List<Usuario> mostrarUsuario() {
+        
+        return IUsuarioRepository.findAll();
         
     }
     

@@ -1,6 +1,7 @@
 package com.Encommerce.service;
 
 import com.Encommerce.logica.Usuario;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -14,5 +15,7 @@ public interface IUsuarioService {
     
     Usuario guardar (Usuario usuario);
     
-    Optional<Usuario> findByEmailUsuario(String emailUsuario);    
+    Optional<Usuario> findByEmailUsuario(String emailUsuario);
+
+    List<Usuario> mostrarUsuario();
 }
