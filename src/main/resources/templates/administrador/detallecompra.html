@@ -1,4 +1,4 @@
-1<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 
     <head>
@@ -8,7 +8,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Gamer House</title>
+        <title>Spring eCommerce</title>
 
 
         <!-- Bootstrap core CSS -->
@@ -24,19 +24,19 @@
         <!-- Navigation -->
         <div th:insert="~{administrador/template_admin.html::header}"></div>
 
-
         <!-- Page Content -->
         <div class="container">
 
 
             <!-- Page Heading/Breadcrumbs -->
             <h1 class="mt-4 mb-3">
-                Gamer House <small>Compras</small>
+                Gamer House <small>Detalles</small>
             </h1>
 
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
-                <li class="breadcrumb-item active">Compras</li>
+                <li class="breadcrumb-item"><a th:href="@{/administrador/verPedido}">Compras</a></li>
+                <li class="breadcrumb-item active">Detalle de Compra</li>
             </ol>
 
             <!-- Blog Post -->
@@ -47,18 +47,18 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th scope="col">No. de Orden</th>
-                                        <th scope="col">Fecha</th>
-                                        <th scope="col">Valor</th>
-                                        <th scope="col">Acción</th>
+                                        <th scope="col">Cantidad</th>
+                                        <th scope="col">Producto</th>                  
+                                        <th scope="col">Precio</th>
+                                        <th scope="col">Total</th>                  
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr th:each="pedidos: ${pedido}">
-                                        <td th:text="${pedidos.numeroPedido}"></td>
-                                        <td th:text="${pedidos.fechaCreacionPedido}"></td>
-                                        <td th:text="${pedidos.totalPedido}"></td>
-                                        <td><a th:href="@{/administrador/detalleCompra/{idPedido} (idPedido=${pedidos.idPedido})}" class="btn btn-success">Ver Detalle</a></td>
+                                    <tr th:each="detalle: ${detalles}">
+                                        <td th:text="${detalle.cantidadOrden}" >Cantidad</td>
+                                        <td th:text="${detalle.nombreDetalleOrden}">Producto</td>
+                                        <td th:text="${detalle.precioOrden}" >Precio</td>
+                                        <td th:text="${detalle.totalOrden}" >Total</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -69,7 +69,6 @@
         </div>
         <!-- /.container -->
 
-        <!-- Footer -->
         <div th:insert="~{administrador/template_admin.html::footer}"></div>
         <!-- /.container -->
     </footer>
