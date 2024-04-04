@@ -1,6 +1,5 @@
 package com.Encommerce.controlador;
 
-import com.Encommerce.logica.DetalleOrden;
 import com.Encommerce.logica.Pedido;
 import com.Encommerce.logica.Usuario;
 import com.Encommerce.service.IDetalleOrdenService;
@@ -12,6 +11,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,6 +37,8 @@ public class UsuarioController {
 
     @Autowired
     private IDetalleOrdenService IDetalleOrdenService;
+    
+    BCryptPasswordEncoder passEncode = new BCryptPasswordEncoder();
 
     //Pedido pedido = new Pedido();
     @GetMapping("/registro")
@@ -50,6 +52,7 @@ public class UsuarioController {
     public String guardarUsuario(Usuario usuario) {
         usuario.setTipoUsuario("USER");
         usuario.setNickUsuario("BLAST 24");
+        usuario.setPasswordUsuario(passEncode.encode(usuario.getPasswordUsuario()));
         loggger.info("El usuario es {}", usuario);
 
         usuarioService.guardar(usuario);
