@@ -25,6 +25,7 @@ import com.Encommerce.service.UsuarioServiceImpl;
 import jakarta.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.Locale;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
@@ -192,7 +193,15 @@ public class HomeController {
 
         loggger.info("Nombre del producto: {}", nombreProducto);
         //Creando la funcion para buscar o filtrar
-        List<Producto> productos = productoService.mostrarProductos().stream().filter(p -> p.getNombreProducto().contains(nombreProducto.toLowerCase(Locale.ITALY))).collect(Collectors.toList());
+        String searchTerm = nombreProducto.toLowerCase(Locale.ITALY);
+
+        // Filtra la lista de productos
+        List<Producto> productos = productoService.mostrarProductos().stream()
+                .filter(p -> {
+                    String productName = p.getNombreProducto().toLowerCase(Locale.ITALY);
+                    return productName.startsWith(searchTerm) || productName.endsWith(searchTerm) || productName.contains(searchTerm);
+                })
+                .collect(Collectors.toList());
         model.addAttribute("productos", productos);
 
         return "administrador/usuario/homeUsuario.html";

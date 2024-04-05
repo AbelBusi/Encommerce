@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.SecurityFilterChain;
 
-import static org.springframework.security.config.Customizer.withDefaults;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -23,24 +22,22 @@ public class SpringUsuariosSecurity {
 
     @Autowired
     private UserDetailsService userDetailsServiceImp;
-        
-    
-    
+
     @Bean
-    AuthenticationManager authenticationManager (AuthenticationConfiguration authenticationConfiguration)throws Exception{
-    
-         return authenticationConfiguration.getAuthenticationManager();
-                 
+    AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+
+        return authenticationConfiguration.getAuthenticationManager();
+
     }
-    
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http.authorizeHttpRequests((authorize) -> authorize
+                .requestMatchers("/**").permitAll()
                 .requestMatchers("/administrador/**").hasRole("ADMIN")
-                .requestMatchers("/productos/**").hasRole("ADMIN")
-                .requestMatchers( "/css/**","/vendor/**").permitAll() 
+                .requestMatchers("/producto/**").hasRole("ADMIN")
+                .requestMatchers("/css/**", "/vendor/**").permitAll()
                 .anyRequest().authenticated())
                 .formLogin(form -> form
                 .loginPage("/usuario/login")
@@ -50,12 +47,12 @@ public class SpringUsuariosSecurity {
         return http.build();
 
     }
-    
+
     @Bean
-    public BCryptPasswordEncoder getEnecoder(){
-    
+    public BCryptPasswordEncoder getEnecoder() {
+
         return new BCryptPasswordEncoder();
-        
+
     }
 
 }

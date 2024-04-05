@@ -2,7 +2,6 @@ package com.Encommerce.controlador;
 
 import com.Encommerce.logica.Producto;
 import com.Encommerce.logica.Usuario;
-import com.Encommerce.repository.IUsuarioRepository;
 import com.Encommerce.service.subirImagen;
 import java.io.IOException;
 import java.util.Optional;

@@ -11,9 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.Encommerce.service.IProductoService;
 import com.Encommerce.service.IUsuarioService;
-import jakarta.servlet.http.HttpSession;
+import java.util.Locale;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -28,7 +31,7 @@ public class AdministadorController {
 
     @Autowired
     private IUsuarioService IUsuarioService;
-    
+
     @Autowired
     private IPedidoService PedidoService;
 
@@ -48,26 +51,42 @@ public class AdministadorController {
         return "administrador/usuarios.html";
 
     }
-    
+
     @GetMapping("/verPedido")
-    public String verPedido(Model model){
-        
-        model.addAttribute("pedido",PedidoService.findAll());
-    
+    public String verPedido(Model model) {
+
+        model.addAttribute("pedido", PedidoService.findAll());
+
         return "administrador/compras.html";
-        
+
     }
-    
+
     @GetMapping("/detalleCompra/{idPedido}")
     public String detalleCompra(Model model, @PathVariable Integer idPedido) {
 
-        
-        Optional <Pedido> pedido=PedidoService.finById(idPedido);
-        
-        model.addAttribute("detalles",pedido.get().getDetalleOrden());
+        Optional<Pedido> pedido = PedidoService.finById(idPedido);
+
+        model.addAttribute("detalles", pedido.get().getDetalleOrden());
         return "administrador/detallecompra.html";
 
     }
-    
+
+    @PostMapping("/buscarProducto")
+    public String buscarProducto(@RequestParam String nombreProducto, Model model) {
+
+        //Creando la funcion para buscar o filtrar
+        String searchTerm = nombreProducto.toLowerCase(Locale.ITALY);
+
+        // Filtra la lista de productos
+        List<Producto> productos = productoService.mostrarProductos().stream()
+                .filter(p -> {
+                    String productName = p.getNombreProducto().toLowerCase(Locale.ITALY);
+                    return productName.startsWith(searchTerm) || productName.endsWith(searchTerm) || productName.contains(searchTerm);
+                })
+                .collect(Collectors.toList());
+        model.addAttribute("productos", productos);
+
+        return "administrador/home.html";
+    }
 
 }
